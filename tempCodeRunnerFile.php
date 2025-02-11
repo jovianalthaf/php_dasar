@@ -1,2 +1,2 @@
 <?php
-// ];
+if ($uang <= $jawabanOlahraga) {

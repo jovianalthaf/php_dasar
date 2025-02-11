@@ -1,81 +1,86 @@
 <?php
-
-// kelompokkan umur 21 yang kelasnya A 
 $mahasiswa = [
-    ['nama' => 'Jovian', 'umur' => 21, 'kelas' => 'A'],
-    ['nama' => 'Caca', 'umur' => 20, 'kelas' => 'A'],
-    ['nama' => 'Wiliam', 'umur' => 21, 'kelas' => 'A'],
-    ['nama' => 'Rolando', 'umur' => 21, 'kelas' => 'B'],
-    ['nama' => 'Garren', 'umur' => 21, 'kelas' => 'B'],
-];
-
-$mahasiswa2 = [
-    'nama' => 'jovian',
-    'umur' => 10,
-    'kelas' => 'A'
-];
-$cars = [
-    ['nama' => "BMW M4", 'terjual' => 100, 'tahun' => 2024, 'harga' => 1000],
-    ['nama' => "BMW M3", 'terjual' => 50, 'tahun' => 2024, 'harga' => 2000],
-    ['nama' => "BMW M5", 'terjual' => 49, 'tahun' => 2024, 'harga' => 3000],
-    ['nama' => "BMW M2", 'terjual' => 50, 'tahun' => 2023, 'harga' => 4000],
-];
-$carsContohKey = [
-    2024 => [
-        ['nama' => "BMW M4", 'terjual' => 100, 'tahun' => 2024, 'harga' => 1000],
-        ['nama' => "BMW M3", 'terjual' => 50, 'tahun' => 2024, 'harga' => 2000],
-        ['nama' => "BMW M5", 'terjual' => 49, 'tahun' => 2024, 'harga' => 3000],
-
+    [
+        "id" => 1,
+        "nama" => "Andi Pratama",
+        "jurusan" => "Informatika",
+        "angkatan" => 2022
     ],
-    2023 => [
-        ['nama' => "BMW M2", 'terjual' => 50, 'tahun' => 2023, 'harga' => 4000],
+    [
+        "id" => 2,
+        "nama" => "Budi Santoso",
+        "jurusan" => "Teknik Mesin",
+        "angkatan" => 2021
+    ],
+    [
+        "id" => 3,
+        "nama" => "Citra Lestari",
+        "jurusan" => "Sistem Informasi",
+        "angkatan" => 2023
+    ],
+    [
+        "id" => 4,
+        "nama" => "Dewi Anggraini",
+        "jurusan" => "Informatika",
+        "angkatan" => 2020
+    ],
+    [
+        "id" => 5,
+        "nama" => "Eka Saputra",
+        "jurusan" => "Teknik Elektro",
+        "angkatan" => 2022
+    ],
+    [
+        "id" => 6,
+        "nama" => "Farhan Maulana",
+        "jurusan" => "Sistem Informasi",
+        "angkatan" => 2021
+    ],
+    [
+        "id" => 7,
+        "nama" => "Gita Permata",
+        "jurusan" => "Teknik Mesin",
+        "angkatan" => 2023
+    ],
+    [
+        "id" => 8,
+        "nama" => "Hadi Prakoso",
+        "jurusan" => "Informatika",
+        "angkatan" => 2024
     ]
 ];
+$totalAngkatan2022  = 0;
+$dataJadwal = [];
+foreach ($mahasiswa as $m) {
+    $jurusan = $m['jurusan'];
 
-$kelompokMobil = [];
-foreach ($cars as $car) {
-    $tahun = $car['tahun'];
-    if ($car['terjual'] >= 50) {
-        // [] <--- push array
-        $kelompokMobil[$tahun][] = [
-            'nama_mobil' => $car['nama'],
-            'terjual' => $car['terjual'],
-            'total_penjualan' => $total = $car['harga'] * $car['terjual'],
-        ];
-    } else {
-        [];
-    };
+    $angkatan = $m['angkatan'];
+
+    if ($angkatan == 2022) {
+        $totalAngkatan2022++;
+    }
+
+
+
+
+    $dataJadwal[$jurusan][] = [
+        'id' => $m['id'],
+        'nama' => $m['nama'],
+        'jurusan' => $m['jurusan'],
+        'angkatan' => $m['angkatan'],
+
+    ];
+
+    // return json_encode([
+    //     'data_mahasiswa' => $dataJadwal,
+    //     'total_angkatan_2022' => $totalAngkatan2022
+    // ]);
 }
 
-var_dump($kelompokMobil);
-
-// $printData = [];
-// echo $mahasiswa2['nama'];
-
-// foreach ($mahasiswa as $m) {
-//     $umur = $m['umur'];
-//     if ($m['umur'] >= 21) {
-//         $printData[$umur][] = [
-//             'name' => $m['nama'],
-//             'kelas' => $m['kelas']
-//         ];
-//     }
-// }
-
-// var_dump($printData);
-
-
-
-// $mahasiswa[] = ['nama' => 'Adam', 'umur' => 20, 'kelas' => 'C'];
-
-// print_r($mahasiswa);
-// ambil setiap data mahasiswa
-
-// $klasifikasi = ['Remaja', 'Dewasa', 'Orang Tua'];
-// $kelompokSiswa = [];
-
-
-// foreach ($klasifikasi as $k) {
-// }
-
-// print_r($kelompokSiswa);
+echo json_encode(
+    [
+        'data' => $dataJadwal,
+        'total_angkatan_2022' => $totalAngkatan2022,
+    ],
+    JSON_PRETTY_PRINT
+);
